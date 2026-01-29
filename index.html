@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Legacy-Safe Web App Starter</title>
+  <title>Head Start Interest Kiosk</title>
   <style>
-    /* Chrome 55 / Android 6 safe CSS (no CSS vars, no grid, no flex gap) */
+    /* Chrome 55 / Android 6 safe CSS */
     html, body { height: 100%; }
     body {
       margin: 0;
@@ -31,29 +31,23 @@
     .topbar {
       background: #1f2a44;
       color: #fff;
-      padding: 12px 14px;
+      padding: 16px 20px;
+      text-align: center;
     }
 
     .topbar h1 {
-      font-size: 16px;
+      font-size: 24px;
       margin: 0;
       font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    .topbar .sub {
-      margin-top: 4px;
-      font-size: 12px;
-      opacity: 0.85;
-      line-height: 1.3;
+      letter-spacing: 0.3px;
     }
 
     .content {
       -webkit-box-flex: 1;
           -ms-flex: 1 0 auto;
               flex: 1 0 auto;
-      padding: 12px;
-      max-width: 900px;
+      padding: 20px;
+      max-width: 800px;
       width: 100%;
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
@@ -63,285 +57,340 @@
     .card {
       background: #fff;
       border: 1px solid #e6e7ef;
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      margin-bottom: 12px;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
     }
 
-    .row {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-              flex-direction: column;
+    .poster-container {
+      text-align: center;
+      margin-bottom: 24px;
     }
 
-    /* Two-column layout at wider widths (no grid) */
-    @media (min-width: 720px) {
-      .row {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-      }
-      .col {
-        width: 50%;
-      }
-      .col + .col {
-        margin-left: 12px;
-      }
+    .poster-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .col { width: 100%; }
+    .no-poster {
+      padding: 60px 20px;
+      background: #f0f1f5;
+      border-radius: 8px;
+      color: #666;
+      font-size: 16px;
+    }
+
+    .big-btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: #28a745;
+      color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+
+    .big-btn:active {
+      opacity: 0.9;
+      -webkit-transform: scale(0.98);
+              transform: scale(0.98);
+    }
 
     .label {
       display: block;
-      font-size: 12px;
+      font-size: 14px;
       color: #333;
-      margin: 10px 0 6px;
+      margin: 16px 0 8px;
       font-weight: 700;
     }
 
-    input[type="text"], textarea {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #d7d9e5;
+      padding: 14px;
+      border: 2px solid #d7d9e5;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 16px;
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
       outline: none;
     }
 
-    textarea { min-height: 96px; resize: vertical; }
+    input:focus {
+      border-color: #1f2a44;
+    }
 
     .btn {
       display: inline-block;
       border: 0;
       background: #1f2a44;
       color: #fff;
-      padding: 10px 12px;
+      padding: 14px 20px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 16px;
       cursor: pointer;
       -webkit-tap-highlight-color: rgba(0,0,0,0);
+      min-width: 120px;
     }
 
-    .btn.secondary { background: #e9ebf4; color: #1f2a44; }
+    .btn.secondary {
+      background: #e9ebf4;
+      color: #1f2a44;
+    }
 
     .btn:active { opacity: 0.85; }
 
-    .btnrow { margin-top: 10px; }
-    .btnrow .btn + .btn { margin-left: 8px; }
-
-    .status {
-      font-size: 12px;
-      margin-top: 8px;
-      line-height: 1.35;
-      color: #38415a;
-    }
-
-    .tabs {
+    .btnrow {
+      margin-top: 20px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-      margin: -6px;
     }
 
-    .tab {
-      margin: 6px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid #d7d9e5;
+    .btnrow .btn {
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      padding: 20px;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+
+    .modal.show {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .modal-content {
       background: #fff;
-      cursor: pointer;
-      font-size: 13px;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      font-size: 20px;
       font-weight: 700;
+      margin: 0 0 16px;
       color: #1f2a44;
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
 
-    .tab.active {
-      background: #1f2a44;
-      color: #fff;
-      border-color: #1f2a44;
+    .status {
+      font-size: 14px;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      line-height: 1.4;
     }
 
-    .footer {
-      padding: 10px 12px;
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .admin-link {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.05);
+      color: #666;
+      padding: 8px 12px;
+      border-radius: 6px;
       font-size: 12px;
-      color: #59627a;
-      text-align: center;
-      opacity: 0.9;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.1);
     }
 
     .list {
-      margin: 8px 0 0;
+      margin: 16px 0 0;
       padding: 0;
       list-style: none;
     }
 
     .list li {
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #e6e7ef;
-      border-radius: 10px;
-      margin-top: 8px;
+      border-radius: 8px;
+      margin-top: 10px;
       background: #fbfbfe;
+      font-size: 14px;
     }
 
     .list .meta {
-      font-size: 11px;
+      font-size: 12px;
       color: #5a6380;
-      margin-top: 6px;
-      word-break: break-word;
+      margin-top: 8px;
     }
 
-    .pill {
-      display: inline-block;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e9ebf4;
-      color: #1f2a44;
-      font-weight: 700;
-      vertical-align: middle;
-      margin-left: 6px;
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #d7d9e5;
+      border-radius: 8px;
+      font-size: 14px;
+      min-height: 200px;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      font-family: monospace;
     }
+
+    .hide { display: none !important; }
   </style>
 </head>
 <body>
   <div class="app">
     <div class="topbar">
-      <h1>Legacy-Safe Web App Starter</h1>
-      <div class="sub">Built for Chrome 55 / Android 6.0.1 • ES5 JavaScript • No CSS Grid/Vars</div>
+      <h1>Head Start Program</h1>
     </div>
 
     <div class="content">
-      <div class="card">
-        <div class="tabs" role="tablist" aria-label="Views">
-          <button class="tab active" data-view="home" type="button">Home</button>
-          <button class="tab" data-view="form" type="button">Form</button>
-          <button class="tab" data-view="saved" type="button">Saved</button>
-          <button class="tab" data-view="about" type="button">About</button>
-        </div>
-        <div class="status" id="status">Ready.</div>
-      </div>
-
-      <div class="card" id="view-home">
-        <h2 style="margin:0 0 8px;font-size:16px;">Home</h2>
-        <div style="font-size:13px;line-height:1.45;color:#2a3142;">
-          This is a simple, touch-friendly starter app that runs on older Android/Chrome.
-          It includes:
-          <ul style="margin:8px 0 0;padding-left:18px;">
-            <li>Tab navigation (no frameworks)</li>
-            <li>Form capture</li>
-            <li>Local save using <b>localStorage</b></li>
-            <li>Export/Import using JSON</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card" id="view-form" style="display:none;">
-        <h2 style="margin:0 0 8px;font-size:16px;">Form</h2>
-
-        <div class="row">
-          <div class="col">
-            <label class="label" for="title">Title</label>
-            <input id="title" type="text" placeholder="e.g., Check-in" autocomplete="off">
+      <!-- Main Display View -->
+      <div id="view-display">
+        <div class="card">
+          <div class="poster-container" id="posterContainer">
+            <div class="no-poster" id="noPoster">
+              No poster uploaded yet. Use Admin panel to upload.
+            </div>
+            <img class="poster-img hide" id="posterImg" alt="Head Start Program Poster">
           </div>
-          <div class="col">
-            <label class="label" for="tag">Tag</label>
-            <input id="tag" type="text" placeholder="e.g., kiosk" autocomplete="off">
+          
+          <button class="big-btn" id="showFormBtn" type="button">
+            I'm Interested! Sign Up Here
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin View -->
+      <div id="view-admin" class="hide">
+        <div class="card">
+          <h2 style="margin:0 0 16px;font-size:20px;">Admin Panel</h2>
+          
+          <label class="label">Upload Poster Image</label>
+          <input type="file" id="posterUpload" accept="image/*" style="margin-bottom:16px;">
+          <div class="btnrow">
+            <button class="btn secondary" id="removePosterBtn" type="button">Remove Poster</button>
           </div>
-        </div>
 
-        <label class="label" for="notes">Notes</label>
-        <textarea id="notes" placeholder="Type details here..."></textarea>
+          <hr style="margin:24px 0;border:0;border-top:1px solid #e6e7ef;">
 
-        <div class="btnrow">
-          <button class="btn" id="saveBtn" type="button">Save Entry</button>
-          <button class="btn secondary" id="clearBtn" type="button">Clear</button>
-        </div>
-      </div>
+          <h3 style="margin:0 0 12px;font-size:16px;">Interest Form Submissions (<span id="count">0</span>)</h3>
+          
+          <div class="btnrow">
+            <button class="btn" id="exportBtn" type="button">Export JSON</button>
+            <button class="btn secondary" id="clearAllBtn" type="button">Clear All</button>
+            <button class="btn secondary" id="backBtn" type="button">Back to Display</button>
+          </div>
 
-      <div class="card" id="view-saved" style="display:none;">
-        <h2 style="margin:0 0 8px;font-size:16px;">Saved</h2>
-        <div style="font-size:13px;color:#2a3142;line-height:1.45;">
-          Entries are stored locally on the device (localStorage).
-        </div>
+          <label class="label">Export Data</label>
+          <textarea id="jsonBox" placeholder="Exported data appears here..."></textarea>
 
-        <div class="btnrow">
-          <button class="btn secondary" id="exportBtn" type="button">Export JSON</button>
-          <button class="btn secondary" id="importBtn" type="button">Import JSON</button>
-          <button class="btn" id="deleteAllBtn" type="button">Delete All</button>
-        </div>
-
-        <label class="label" for="jsonBox">JSON</label>
-        <textarea id="jsonBox" placeholder="Exported JSON appears here. Paste JSON here to import."></textarea>
-
-        <ul class="list" id="list"></ul>
-      </div>
-
-      <div class="card" id="view-about" style="display:none;">
-        <h2 style="margin:0 0 8px;font-size:16px;">About</h2>
-        <div style="font-size:13px;line-height:1.45;color:#2a3142;">
-          <p style="margin:0 0 8px;">Compatibility notes:</p>
-          <ul style="margin:0;padding-left:18px;">
-            <li>JavaScript is ES5 (no arrow functions, no async/await).</li>
-            <li>CSS avoids grid/variables and uses basic flexbox.</li>
-            <li>Works offline <i>after</i> the page is loaded. (You can add a Service Worker later, but Chrome 55 support is limited.)</li>
-          </ul>
-          <p style="margin:8px 0 0;">If you tell me what your app needs to do, I can customize this into your full app.</p>
+          <label class="label">Submissions</label>
+          <ul class="list" id="submissionList"></ul>
         </div>
       </div>
-
     </div>
 
-    <div class="footer">© <span id="year"></span> • Legacy-safe template</div>
+    <!-- Interest Form Modal -->
+    <div class="modal" id="formModal">
+      <div class="modal-content">
+        <h2 class="modal-header">Head Start Interest Form</h2>
+        <p style="margin:0 0 16px;font-size:14px;color:#555;">
+          Please fill out this form and we'll contact you soon!
+        </p>
+
+        <label class="label" for="fullName">Full Name *</label>
+        <input id="fullName" type="text" placeholder="Enter your full name" required>
+
+        <label class="label" for="email">Email Address *</label>
+        <input id="email" type="email" placeholder="example@email.com" required>
+
+        <label class="label" for="phone">Phone Number *</label>
+        <input id="phone" type="tel" placeholder="(555) 123-4567" required>
+
+        <div id="formStatus"></div>
+
+        <div class="btnrow">
+          <button class="btn" id="submitFormBtn" type="button">Submit</button>
+          <button class="btn secondary" id="cancelFormBtn" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <a class="admin-link" id="adminLink">Admin</a>
   </div>
 
   <script>
-    // ES5-only JavaScript for Chrome 55
     (function () {
-      var STORAGE_KEY = 'legacy_app_entries_v1';
+      var STORAGE_KEY_SUBMISSIONS = 'headstart_submissions_v1';
+      var STORAGE_KEY_POSTER = 'headstart_poster_v1';
 
-      var statusEl = document.getElementById('status');
-      var yearEl = document.getElementById('year');
-      var tabs = document.getElementsByClassName('tab');
+      var showFormBtn = document.getElementById('showFormBtn');
+      var adminLink = document.getElementById('adminLink');
+      
+      var viewDisplay = document.getElementById('view-display');
+      var viewAdmin = document.getElementById('view-admin');
+      
+      var formModal = document.getElementById('formModal');
+      var fullNameEl = document.getElementById('fullName');
+      var emailEl = document.getElementById('email');
+      var phoneEl = document.getElementById('phone');
+      var submitFormBtn = document.getElementById('submitFormBtn');
+      var cancelFormBtn = document.getElementById('cancelFormBtn');
+      var formStatus = document.getElementById('formStatus');
 
-      var viewIds = ['home', 'form', 'saved', 'about'];
+      var posterUpload = document.getElementById('posterUpload');
+      var posterContainer = document.getElementById('posterContainer');
+      var posterImg = document.getElementById('posterImg');
+      var noPoster = document.getElementById('noPoster');
+      var removePosterBtn = document.getElementById('removePosterBtn');
 
-      var titleEl = document.getElementById('title');
-      var tagEl = document.getElementById('tag');
-      var notesEl = document.getElementById('notes');
-
-      var saveBtn = document.getElementById('saveBtn');
-      var clearBtn = document.getElementById('clearBtn');
-
+      var submissionList = document.getElementById('submissionList');
       var exportBtn = document.getElementById('exportBtn');
-      var importBtn = document.getElementById('importBtn');
-      var deleteAllBtn = document.getElementById('deleteAllBtn');
+      var clearAllBtn = document.getElementById('clearAllBtn');
+      var backBtn = document.getElementById('backBtn');
       var jsonBox = document.getElementById('jsonBox');
-      var listEl = document.getElementById('list');
-
-      function setStatus(msg) {
-        statusEl.innerHTML = msg;
-      }
-
-      function pad2(n) {
-        return n < 10 ? '0' + n : '' + n;
-      }
-
-      function formatDate(ts) {
-        var d = new Date(ts);
-        return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
-      }
+      var countEl = document.getElementById('count');
 
       function safeJsonParse(s) {
         try {
@@ -351,51 +400,47 @@
         }
       }
 
-      function loadEntries() {
-        var raw = localStorage.getItem(STORAGE_KEY);
+      function loadSubmissions() {
+        var raw = localStorage.getItem(STORAGE_KEY_SUBMISSIONS);
         if (!raw) return [];
         var parsed = safeJsonParse(raw);
-        if (!parsed || !parsed.length) return [];
-        return parsed;
+        return parsed || [];
       }
 
-      function saveEntries(entries) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      function saveSubmissions(subs) {
+        localStorage.setItem(STORAGE_KEY_SUBMISSIONS, JSON.stringify(subs));
       }
 
-      function renderList() {
-        var entries = loadEntries();
-        listEl.innerHTML = '';
-
-        if (!entries.length) {
-          var empty = document.createElement('li');
-          empty.innerHTML = '<b>No entries yet.</b><div class="meta">Add one in the Form tab.</div>';
-          listEl.appendChild(empty);
-          return;
-        }
-
-        for (var i = 0; i < entries.length; i++) {
-          var e = entries[i];
-          var li = document.createElement('li');
-
-          var t = escapeHtml(e.title || '(Untitled)');
-          var tag = escapeHtml(e.tag || '');
-          var notes = escapeHtml(e.notes || '');
-
-          li.innerHTML =
-            '<div><b>' + t + '</b>' + (tag ? '<span class="pill">' + tag + '</span>' : '') + '</div>' +
-            (notes ? '<div style="margin-top:6px;font-size:13px;line-height:1.4;">' + notes.replace(/\n/g, '<br>') + '</div>' : '') +
-            '<div class="meta">' + formatDate(e.createdAt) + '</div>' +
-            '<div class="btnrow" style="margin-top:8px;">' +
-              '<button class="btn secondary" data-act="copy" data-id="' + e.id + '" type="button">Copy JSON</button>' +
-              '<button class="btn" data-act="delete" data-id="' + e.id + '" type="button">Delete</button>' +
-            '</div>';
-
-          listEl.appendChild(li);
+      function loadPoster() {
+        var posterData = localStorage.getItem(STORAGE_KEY_POSTER);
+        if (posterData) {
+          posterImg.src = posterData;
+          posterImg.className = 'poster-img';
+          noPoster.className = 'no-poster hide';
+        } else {
+          posterImg.className = 'poster-img hide';
+          noPoster.className = 'no-poster';
         }
       }
 
-      // Very small HTML escaper (ES5)
+      function savePoster(dataUrl) {
+        localStorage.setItem(STORAGE_KEY_POSTER, dataUrl);
+        loadPoster();
+      }
+
+      function removePoster() {
+        localStorage.removeItem(STORAGE_KEY_POSTER);
+        loadPoster();
+      }
+
+      function showStatus(el, msg, type) {
+        el.innerHTML = '<div class="status ' + type + '">' + escapeHtml(msg) + '</div>';
+      }
+
+      function clearStatus(el) {
+        el.innerHTML = '';
+      }
+
       function escapeHtml(s) {
         return String(s)
           .replace(/&/g, '&amp;')
@@ -406,153 +451,174 @@
       }
 
       function uid() {
-        // Simple unique id (good enough for local use)
-        return 'id_' + (new Date().getTime()) + '_' + Math.floor(Math.random() * 100000);
+        return 'id_' + new Date().getTime() + '_' + Math.floor(Math.random() * 100000);
       }
 
-      function clearForm() {
-        titleEl.value = '';
-        tagEl.value = '';
-        notesEl.value = '';
+      function formatDate(ts) {
+        var d = new Date(ts);
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var hours = d.getHours();
+        var mins = d.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        
+        return month + '/' + day + '/' + year + ' ' + hours + ':' + (mins < 10 ? '0' : '') + mins + ' ' + ampm;
       }
 
-      function showView(view) {
-        for (var i = 0; i < viewIds.length; i++) {
-          var id = viewIds[i];
-          var el = document.getElementById('view-' + id);
-          el.style.display = (id === view) ? 'block' : 'none';
+      function showFormModal() {
+        formModal.className = 'modal show';
+        clearStatus(formStatus);
+        fullNameEl.value = '';
+        emailEl.value = '';
+        phoneEl.value = '';
+      }
+
+      function hideFormModal() {
+        formModal.className = 'modal';
+      }
+
+      function submitForm() {
+        var name = fullNameEl.value.trim();
+        var email = emailEl.value.trim();
+        var phone = phoneEl.value.trim();
+
+        if (!name || !email || !phone) {
+          showStatus(formStatus, 'Please fill out all fields.', 'error');
+          return;
         }
 
-        for (var j = 0; j < tabs.length; j++) {
-          var b = tabs[j];
-          var isActive = (b.getAttribute('data-view') === view);
-          b.className = isActive ? 'tab active' : 'tab';
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          showStatus(formStatus, 'Please enter a valid email address.', 'error');
+          return;
         }
 
-        if (view === 'saved') {
-          renderList();
+        var submissions = loadSubmissions();
+        var submission = {
+          id: uid(),
+          fullName: name,
+          email: email,
+          phone: phone,
+          submittedAt: new Date().getTime()
+        };
+
+        submissions.unshift(submission);
+        saveSubmissions(submissions);
+
+        showStatus(formStatus, 'Thank you! We will contact you soon.', 'success');
+        
+        setTimeout(function() {
+          hideFormModal();
+        }, 2000);
+      }
+
+      function renderSubmissions() {
+        var submissions = loadSubmissions();
+        countEl.innerHTML = String(submissions.length);
+        submissionList.innerHTML = '';
+
+        if (!submissions.length) {
+          var empty = document.createElement('li');
+          empty.innerHTML = '<b>No submissions yet.</b>';
+          submissionList.appendChild(empty);
+          return;
+        }
+
+        for (var i = 0; i < submissions.length; i++) {
+          var sub = submissions[i];
+          var li = document.createElement('li');
+          
+          li.innerHTML =
+            '<div><b>' + escapeHtml(sub.fullName) + '</b></div>' +
+            '<div style="margin-top:4px;"><b>Email:</b> ' + escapeHtml(sub.email) + '</div>' +
+            '<div><b>Phone:</b> ' + escapeHtml(sub.phone) + '</div>' +
+            '<div class="meta">Submitted: ' + formatDate(sub.submittedAt) + '</div>' +
+            '<div class="btnrow" style="margin-top:10px;">' +
+              '<button class="btn secondary" data-act="delete" data-id="' + sub.id + '" type="button">Delete</button>' +
+            '</div>';
+
+          submissionList.appendChild(li);
         }
       }
 
-      function bindTabs() {
-        for (var i = 0; i < tabs.length; i++) {
-          tabs[i].addEventListener('click', function (evt) {
-            var view = evt.target.getAttribute('data-view');
-            showView(view);
-            setStatus('Viewing: <b>' + escapeHtml(view) + '</b>');
-          });
-        }
+      function showAdmin() {
+        viewDisplay.className = 'hide';
+        viewAdmin.className = '';
+        renderSubmissions();
       }
 
-      function bindButtons() {
-        saveBtn.addEventListener('click', function () {
-          var title = titleEl.value;
-          var tag = tagEl.value;
-          var notes = notesEl.value;
+      function showDisplay() {
+        viewAdmin.className = 'hide';
+        viewDisplay.className = '';
+      }
 
-          if (!title && !notes) {
-            setStatus('Please enter at least a title or notes.');
-            return;
-          }
+      // Event listeners
+      showFormBtn.addEventListener('click', showFormModal);
+      cancelFormBtn.addEventListener('click', hideFormModal);
+      submitFormBtn.addEventListener('click', submitForm);
+      adminLink.addEventListener('click', showAdmin);
+      backBtn.addEventListener('click', showDisplay);
 
-          var entries = loadEntries();
-          var entry = {
-            id: uid(),
-            title: title,
-            tag: tag,
-            notes: notes,
-            createdAt: new Date().getTime()
-          };
+      posterUpload.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
 
-          entries.unshift(entry);
-          saveEntries(entries);
+        if (!file.type.match('image.*')) {
+          alert('Please select an image file.');
+          return;
+        }
 
-          setStatus('Saved ✓');
-          clearForm();
-        });
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          savePoster(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
 
-        clearBtn.addEventListener('click', function () {
-          clearForm();
-          setStatus('Cleared.');
-        });
+      removePosterBtn.addEventListener('click', function() {
+        if (confirm('Remove the current poster?')) {
+          removePoster();
+        }
+      });
 
-        exportBtn.addEventListener('click', function () {
-          var entries = loadEntries();
-          jsonBox.value = JSON.stringify(entries, null, 2);
-          setStatus('Exported to JSON box.');
-        });
+      exportBtn.addEventListener('click', function() {
+        var submissions = loadSubmissions();
+        jsonBox.value = JSON.stringify(submissions, null, 2);
+      });
 
-        importBtn.addEventListener('click', function () {
-          var parsed = safeJsonParse(jsonBox.value);
-          if (!parsed || !parsed.length) {
-            setStatus('Import failed: JSON must be an array of entries.');
-            return;
-          }
-          saveEntries(parsed);
-          renderList();
-          setStatus('Imported ✓');
-        });
+      clearAllBtn.addEventListener('click', function() {
+        if (confirm('Delete ALL submissions? This cannot be undone.')) {
+          localStorage.removeItem(STORAGE_KEY_SUBMISSIONS);
+          renderSubmissions();
+          jsonBox.value = '';
+        }
+      });
 
-        deleteAllBtn.addEventListener('click', function () {
-          localStorage.removeItem(STORAGE_KEY);
-          renderList();
-          setStatus('Deleted all entries.');
-        });
+      submissionList.addEventListener('click', function(evt) {
+        var t = evt.target;
+        if (!t || !t.getAttribute) return;
 
-        // Event delegation for list action buttons
-        listEl.addEventListener('click', function (evt) {
-          var t = evt.target;
-          if (!t || !t.getAttribute) return;
+        var act = t.getAttribute('data-act');
+        var id = t.getAttribute('data-id');
+        if (!act || !id) return;
 
-          var act = t.getAttribute('data-act');
-          var id = t.getAttribute('data-id');
-          if (!act || !id) return;
-
-          var entries = loadEntries();
-
-          if (act === 'delete') {
-            var kept = [];
-            for (var i = 0; i < entries.length; i++) {
-              if (entries[i].id !== id) kept.push(entries[i]);
+        if (act === 'delete') {
+          var submissions = loadSubmissions();
+          var filtered = [];
+          for (var i = 0; i < submissions.length; i++) {
+            if (submissions[i].id !== id) {
+              filtered.push(submissions[i]);
             }
-            saveEntries(kept);
-            renderList();
-            setStatus('Deleted entry.');
-            return;
           }
-
-          if (act === 'copy') {
-            // Copy JSON for that entry into the JSON box (clipboard APIs are limited)
-            for (var j = 0; j < entries.length; j++) {
-              if (entries[j].id === id) {
-                jsonBox.value = JSON.stringify(entries[j], null, 2);
-                setStatus('Entry JSON loaded into JSON box. Long-press to copy if needed.');
-                showView('saved');
-                return;
-              }
-            }
-          }
-        });
-      }
-
-      function init() {
-        yearEl.innerHTML = String(new Date().getFullYear());
-        bindTabs();
-        bindButtons();
-        showView('home');
-
-        // Detect storage availability
-        try {
-          var testKey = '__ls_test__';
-          localStorage.setItem(testKey, '1');
-          localStorage.removeItem(testKey);
-          setStatus('Ready. Local storage OK.');
-        } catch (e) {
-          setStatus('Warning: localStorage is not available.');
+          saveSubmissions(filtered);
+          renderSubmissions();
         }
-      }
+      });
 
-      init();
+      // Initialize
+      loadPoster();
     })();
   </script>
 </body>
